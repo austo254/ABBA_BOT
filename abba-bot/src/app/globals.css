@@ -1,0 +1,214 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jet), ui-monospace, monospace;
+}
+
+@theme {
+  --color-terminal-bg: #04060b;
+  --color-panel: #0a0e16;
+  --color-panel-2: #0d121c;
+  --color-line: rgba(148, 163, 184, 0.08);
+  --color-mint: #34f5a2;
+  --color-cyan: #45e0ff;
+  --color-rose: #ff5470;
+  --color-amber: #ffc14d;
+  --color-violet: #8b9cf9;
+}
+
+html,
+body {
+  background: #04060b;
+  color-scheme: dark;
+}
+
+::selection {
+  background: rgba(52, 245, 162, 0.25);
+  color: #e8fff4;
+}
+
+/* --- backdrop texture ------------------------------------------------------ */
+.term-grid {
+  background-image:
+    linear-gradient(rgba(148, 163, 184, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.045) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, black 30%, transparent 100%);
+}
+
+.term-noise::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.35;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='linear' slope='0.05'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  z-index: 60;
+  mix-blend-mode: overlay;
+}
+
+/* --- panels ----------------------------------------------------------------- */
+.panel {
+  position: relative;
+  border: 1px solid rgba(148, 163, 184, 0.09);
+  background: linear-gradient(180deg, rgba(19, 26, 38, 0.55), rgba(9, 13, 21, 0.85));
+  backdrop-filter: blur(14px);
+  border-radius: 20px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 24px 60px -30px rgba(0, 0, 0, 0.9);
+}
+
+.panel-tight {
+  border: 1px solid rgba(148, 163, 184, 0.09);
+  background: rgba(10, 14, 22, 0.6);
+  border-radius: 14px;
+}
+
+.glow-mint {
+  box-shadow: 0 0 0 1px rgba(52, 245, 162, 0.25), 0 0 44px -8px rgba(52, 245, 162, 0.35);
+}
+
+.text-glow-mint {
+  text-shadow: 0 0 18px rgba(52, 245, 162, 0.55);
+}
+
+.text-glow-rose {
+  text-shadow: 0 0 18px rgba(255, 84, 112, 0.55);
+}
+
+/* --- status pulse ------------------------------------------------------------ */
+@keyframes pulse-dot {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 var(--pulse-color, rgba(52, 245, 162, 0.5));
+  }
+  50% {
+    box-shadow: 0 0 0 6px transparent;
+  }
+}
+
+.pulse-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes blink-soft {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.blink-soft {
+  animation: blink-soft 1.6s ease-in-out infinite;
+}
+
+/* --- scanner (flat positions radar) ----------------------------------------- */
+@keyframes radar-sweep {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.radar-sweep {
+  animation: radar-sweep 3.2s linear infinite;
+  transform-origin: center;
+}
+
+/* --- progress shimmer -------------------------------------------------------- */
+@keyframes shimmer {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(220%);
+  }
+}
+
+.shimmer-bar::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 45%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.22), transparent);
+  animation: shimmer 2.4s ease-in-out infinite;
+}
+
+/* --- scrollbars -------------------------------------------------------------- */
+.nice-scroll::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.nice-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.nice-scroll::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.18);
+  border-radius: 999px;
+}
+.nice-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.32);
+}
+
+/* --- numbers ----------------------------------------------------------------- */
+.tabular {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+/* --- feed item entrance ------------------------------------------------------- */
+@keyframes feed-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.feed-in {
+  animation: feed-in 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* --- target hit sweep --------------------------------------------------------- */
+@keyframes target-sweep {
+  0%,
+  100% {
+    opacity: 0.12;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.target-aura {
+  animation: target-sweep 2.8s ease-in-out infinite;
+}
+
+/* --- connection alert stripe ---------------------------------------------------- */
+@keyframes stripe-slide {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 42px 0;
+  }
+}
+
+.conn-stripes {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    rgba(255, 84, 112, 0.16) 0 14px,
+    transparent 14px 28px
+  );
+  animation: stripe-slide 1.2s linear infinite;
+}
