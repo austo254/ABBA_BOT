@@ -56,7 +56,7 @@ STALE_TICK_MS = int(os.getenv("STALE_TICK_MS", "15000"))
 ORDER_TIMEOUT = float(os.getenv("ORDER_TIMEOUT", "8.0"))
 MAGIC = int(os.getenv("MT5_MAGIC", "260415"))  # ABBA magic number
 
-SYMBOLS = ["EURUSD", "GBPUSD", "USDJPY", "XAUUSD"]
+SYMBOLS = ["EURUSD.m", "GBPUSD.m", "USDJPY.m", "XAUUSD.m"]
 
 # ---------------------------------------------------------------------------
 # Connection state (thread-safe)
