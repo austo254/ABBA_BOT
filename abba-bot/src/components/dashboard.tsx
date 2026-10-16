@@ -88,7 +88,7 @@ function AN({ value, format }: { value: number; format: (n: number) => string })
 
 export default function Dashboard() {
   const [snap, setSnap] = useState<EngineSnapshot | null>(null);
-  const [symbol, setSymbol] = useState<SymbolCode>("EURUSD.m");
+  const [symbol, setSymbol] = useState<SymbolCode>("EURUSD");
   const [clockNow, setClockNow] = useState<number>(Date.now());
   const snapAt = useRef<number>(Date.now());
   const busy = useRef(false);
