@@ -2,7 +2,7 @@
 // ABBA · Market & session definitions (shared between engine + dashboard)
 // ---------------------------------------------------------------------------
 
-export type SymbolCode = "EURUSD.m" | "GBPUSD.m" | "USDJPY.m" | "XAUUSD.m";
+export type SymbolCode = "EURUSD" | "GBPUSD" | "USDJPY" | "XAUUSD";
 
 export interface SymbolSpec {
   code: SymbolCode;
@@ -17,7 +17,7 @@ export interface SymbolSpec {
 
 export const SYMBOLS: SymbolSpec[] = [
   {
-    code: "EURUSD.m",
+    code: "EURUSD",
     name: "Euro / US Dollar",
     base: 1.0874,
     pip: 0.0001,
@@ -27,7 +27,7 @@ export const SYMBOLS: SymbolSpec[] = [
     sigmaPipsPerMin: 1.5,
   },
   {
-    code: "GBPUSD.m",
+    code: "GBPUSD",
     name: "Pound / US Dollar",
     base: 1.2698,
     pip: 0.0001,
@@ -37,7 +37,7 @@ export const SYMBOLS: SymbolSpec[] = [
     sigmaPipsPerMin: 2.0,
   },
   {
-    code: "USDJPY.m",
+    code: "USDJPY",
     name: "US Dollar / Yen",
     base: 149.32,
     pip: 0.01,
@@ -47,7 +47,7 @@ export const SYMBOLS: SymbolSpec[] = [
     sigmaPipsPerMin: 2.0,
   },
   {
-    code: "XAUUSD.m",
+    code: "XAUUSD",
     name: "Gold / US Dollar",
     base: 2331.6,
     pip: 0.1,
